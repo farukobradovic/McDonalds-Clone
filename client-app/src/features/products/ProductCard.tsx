@@ -8,9 +8,6 @@ interface IProps {
 }
 
 const ProductCard: React.FC<IProps> = ({ product }) => {
-  {
-    console.log(product);
-  }
   return (
     <Fragment>
       <Link to={`/products/${product.id}`} className='product-card'>

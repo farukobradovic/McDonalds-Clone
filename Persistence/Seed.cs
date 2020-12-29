@@ -4,13 +4,41 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser{
+                        Name="Faruk",
+                        Lastname ="Obradovic",
+                        UserName = "faruk",
+                        Adress = "Mostar Zalik 3",
+                        PhoneNumber = "066555444",
+                        Email = "faruk@hotmail.com"
+                    },
+                     new AppUser{
+                        Name="Belmin",
+                        Lastname ="Mahic",
+                        UserName = "belmin",
+                        Adress = "Mostar Zalik 7",
+                        PhoneNumber = "066999999",
+                        Email = "belmin@hotmail.com"
+                    }
+                };
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
             if (!context.Categories.Any())
             {
                 var categories = new List<Category>{
@@ -25,7 +53,9 @@ namespace Persistence
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609098027/big-mac_fjgd5k.png"
                         },
-
+                        Fat = 25,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                     },
                     new Product{
                         Name = "Tasty Burger",
@@ -33,7 +63,10 @@ namespace Persistence
                         Price = 5,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609098054/tasty-burger_i3fevs.png"
-                        }
+                        },
+                        Fat = 24,
+                        Carbohydrates = 40,
+                        Protein = 26.2
                     },
                       new Product{
                         Name = "Hamburger",
@@ -41,7 +74,10 @@ namespace Persistence
                         Price = 4,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167844/hamburger_vedp0u.png"
-                        }
+                        },
+                        Fat = 25,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                     },
                     new Product{
                         Name = "Cheesburger",
@@ -49,7 +85,10 @@ namespace Persistence
                         Price = 5,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167825/cheesburger_qxvugd.png"
-                        }
+                        },
+                        Fat = 30,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                     },
                       new Product{
                         Name = "Dupli Cheesburger",
@@ -57,7 +96,10 @@ namespace Persistence
                         Price = 4,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167824/dupli-cheesburger_gch9xv.png"
-                        }
+                        },
+                        Fat = 50,
+                        Carbohydrates = 62,
+                        Protein = 28.2
                     },
                       new Product{
                         Name = "Hamburger Royal",
@@ -65,7 +107,10 @@ namespace Persistence
                         Price = 7,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167844/hamburger-royal_qrtu2g.png"
-                        }
+                        },
+                        Fat = 29.9,
+                        Carbohydrates = 44,
+                        Protein = 22.2
                     },
                       new Product{
                         Name = "McChicken",
@@ -73,7 +118,10 @@ namespace Persistence
                         Price = 5,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167891/mcchicken_ipagyk.png"
-                        }
+                        },
+                        Fat = 35,
+                        Carbohydrates = 42.5,
+                        Protein = 26.8
                     },
                       new Product{
                         Name = "Filet-o-Filet",
@@ -81,7 +129,10 @@ namespace Persistence
                         Price = 3,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167844/filetofilet_pu2nzj.png"
-                        }
+                        },
+                        Fat = 25,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                     },
                       new Product{
                         Name = "Grand Big mac",
@@ -89,7 +140,10 @@ namespace Persistence
                         Price = 4,
                         Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167843/grandbigmac_p98ze0.png"
-                        }
+                        },
+                        Fat = 55,
+                        Carbohydrates = 52,
+                        Protein = 29.2
                     }
                      }
                     },
@@ -103,7 +157,10 @@ namespace Persistence
                             Price = 4,
                             Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167891/mcnuggets4_dq5szi.png"
-                         }
+                         },
+                         Fat = 13,
+                        Carbohydrates = 22,
+                        Protein = 16.2
                         },
                            new Product{
                             Name = "Chicken McNuggets 6",
@@ -111,7 +168,10 @@ namespace Persistence
                             Price = 5,
                             Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167906/mcnuggets6_ybbxow.png"
-                         }
+                         },
+                         Fat = 15,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                         },
                            new Product{
                             Name = "Chicken McNuggets 9",
@@ -119,7 +179,10 @@ namespace Persistence
                             Price = 6,
                             Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167906/mcnuggets9_kyrlum.png"
-                         }
+                         },
+                         Fat = 15,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                         },
                            new Product{
                             Name = "Chicken Wings",
@@ -127,7 +190,10 @@ namespace Persistence
                             Price = 4.5,
                             Photo = new Photo{
                             Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167891/mcnuggets4_dq5szi.png"
-                         }
+                         },
+                         Fat = 35,
+                        Carbohydrates = 42,
+                        Protein = 16.2
                         }
 
                         }
@@ -142,7 +208,10 @@ namespace Persistence
                                 Price = 2.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167908/mcwrap2_w5e5yw.png"
-                                }
+                                },
+                                Fat = 25,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                             },
                              new Product{
                                 Name = "McWrap Classic Beef",
@@ -150,7 +219,10 @@ namespace Persistence
                                 Price = 2.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167906/mcwrap1_d9y9wd.png"
-                                }
+                                },
+                                Fat = 25,
+                        Carbohydrates = 42,
+                        Protein = 26.2
                             }
                         }
                     }
@@ -164,7 +236,10 @@ namespace Persistence
                                 Price = 3,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167843/karamela_ton3yw.png"
-                                }
+                                },
+                                Fat = 25,
+                                Carbohydrates = 42,
+                                Protein = 26.2
                             },
                              new Product{
                                 Name = "McSundae Deluxe Jagoda",
@@ -172,7 +247,10 @@ namespace Persistence
                                 Price = 2.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167846/jagoda_giq0y9.png"
-                                }
+                                },
+                                 Fat = 25,
+                                Carbohydrates = 42,
+                                Protein = 26.2
                             },
                              new Product{
                                 Name = "McSundae Deluxe Čokoloada",
@@ -180,7 +258,10 @@ namespace Persistence
                                 Price = 2.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167823/cokolada_d0vuzo.png"
-                                }
+                                },
+                                 Fat = 25,
+                                Carbohydrates = 42,
+                                Protein = 26.2
                             }
                         }
                     }
@@ -194,7 +275,10 @@ namespace Persistence
                                 Price = 3.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167823/cola05_dertss.png"
-                                }
+                                },
+                                 Fat = 0,
+                                Carbohydrates = 53,
+                                Protein = 0
                             },
                              new Product{
                                 Name = "Coca-Cola 0,25l",
@@ -202,7 +286,10 @@ namespace Persistence
                                 Price = 2,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167823/cola025_ssmqkr.png"
-                                }
+                                },
+                                 Fat = 0,
+                                Carbohydrates = 32,
+                                Protein = 0
                             }
                         }
                     }
@@ -216,7 +303,10 @@ namespace Persistence
                                 Price = 5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167892/malasalata_tycb9c.png"
-                                }
+                                },
+                                 Fat = 15,
+                                Carbohydrates = 42,
+                                Protein = 56.2
                             }
                         }
                     },
@@ -230,7 +320,10 @@ namespace Persistence
                                 Price = 4.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167923/pomfritveliki_ycjx76.png"
-                                }
+                                },
+                                 Fat = 25,
+                                Carbohydrates = 42,
+                                Protein = 26.2
                             },
                              new Product{
                                 Name = "Pomfrit Mali",
@@ -238,7 +331,10 @@ namespace Persistence
                                 Price = 2.5,
                                 Photo = new Photo{
                                     Url = "https://res.cloudinary.com/rukfash/image/upload/v1609167921/pomfritmali_yi2wqt.png"
-                                }
+                                },
+                                 Fat = 25,
+                                Carbohydrates = 42,
+                                Protein = 26.2
                             }
                         }
                     }

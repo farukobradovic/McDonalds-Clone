@@ -2,8 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\API",
+    "\\API\\Controllers",
+    "\\Application",
+    "\\Application\\User",
     "\\Persistence"
   ],
-  "SelectedNode": "\\API\\Startup.cs",
+  "SelectedNode": "\\API\\Controllers\\ProductsController.cs",
   "PreviewInSolutionExplorer": false
 }

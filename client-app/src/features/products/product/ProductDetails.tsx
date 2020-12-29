@@ -26,14 +26,14 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
     // return () => {
     //   clearProduct();
     // };
-  }, [loadProduct]);
+  }, [loadProduct, match.params.id]);
 
   if (loadingProduct) return <LoadingComponent content='Loading product' />;
 
   return (
     <div className='container'>
       <ProductInfo product={product!} key={product!.id} />
-      <ProductTable />
+      <ProductTable product={product!} key={product!.name} />
       <ProductReviews />
     </div>
   );

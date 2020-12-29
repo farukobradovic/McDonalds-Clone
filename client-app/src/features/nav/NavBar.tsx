@@ -1,7 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import { RootStoreContext } from "../../app/stores/rootStore";
 
 export const NavBar = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { user } = rootStore.userStore;
   return (
     <Fragment>
       <nav className='navigation'>
@@ -60,9 +63,34 @@ export const NavBar = () => {
             <a href='#' className='social-links-link'>
               <i className='fas fa-shopping-cart'></i>
             </a>
-            <a href='#' className='social-links-link'>
+            {/* <a href='#' className='social-links-link'>
               <i className='fas fa-user'></i>
-            </a>
+            </a> */}
+            {user ? (
+              <div className='dropdown'>
+                <i className='fas fa-user'></i>
+                <div className='dropdown-content'>
+                  <a href='#'>
+                    <i className='fas fa-user-circle'></i> Moj profil
+                  </a>
+                  <a href='#'>
+                    <i className='fas fa-sign-out-alt'></i> Odjava
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className='dropdown'>
+                <i className='fas fa-user'></i>
+                <div className='dropdown-content'>
+                  <a href='#'>
+                    <i className='fas fa-user-plus'></i> Registracija
+                  </a>
+                  <a href='#'>
+                    <i className='fas fa-sign-out-alt'></i> Prijava
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </nav>
