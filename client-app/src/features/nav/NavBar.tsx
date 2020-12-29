@@ -7,7 +7,7 @@ export const NavBar = () => {
       <nav className='navigation'>
         <div className='container'>
           <Link to='/' className='logo'>
-            <img src='/assets/mcdonalds-logo.png' />
+            <img src='/assets/mcdonalds-logo.png' alt='logo' />
           </Link>
           {/* <a href='#sss' className='logo'>
             <img src='/assets/mcdonalds-logo.png' />
@@ -15,9 +15,9 @@ export const NavBar = () => {
           <div className='list-box'>
             <ul className='list'>
               <li className='list__item'>
-                <a href='proizvodi.html' className='list__item__link'>
+                <Link to='/products' className='list__item__link'>
                   Proizvodi
-                </a>
+                </Link>
               </li>
               <li className='list__item'>
                 <Link to='/family' className='list__item__link'>

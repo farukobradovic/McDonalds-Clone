@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { MobileApp } from "../articles/MobileApp";
 
 export const HomePage = () => {
   return (
@@ -10,12 +9,12 @@ export const HomePage = () => {
           <div className='container'>
             <div className='main-part'>
               <a href='https://www.korpa.ba/mcdonalds' target='_blank'>
-                <img src='/assets/landing-1.jpg' />
+                <img src='/assets/landing-1.jpg' alt='image' />
               </a>
             </div>
             <div className='secondary-part'>
               <div className='article-card'>
-                <img src='/assets/landing-3.jpg' />
+                <img src='/assets/landing-3.jpg' alt='image' />
                 <h3 className='heading-tertiary'>
                   McDonald's Mobilna Aplikacija
                 </h3>
@@ -31,7 +30,7 @@ export const HomePage = () => {
                 </a> */}
               </div>
               <div className='article-card'>
-                <img src='/assets/landing-2.png' />
+                <img src='/assets/landing-2.png' alt='image' />
                 <h3 className='heading-tertiary'>Posjetite Naš McCafe</h3>
                 <p className='paragraph-article'>
                   Posjetite naše McCafe objektate i uživajte u ugodnoj atmosferi
@@ -42,7 +41,7 @@ export const HomePage = () => {
                 </a>
               </div>
               <div className='article-card'>
-                <img src='/assets/landing-4.png' />
+                <img src='/assets/landing-4.png' alt='image' />
                 <h3 className='heading-tertiary'>Novosti U McDonald's</h3>
                 <p className='paragraph-article'>
                   Saznajte sve o najnovijim ponudama i proizvodima koje smo

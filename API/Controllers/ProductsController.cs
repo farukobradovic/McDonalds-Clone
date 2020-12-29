@@ -13,6 +13,11 @@ namespace API.Controllers
         {
             return await Mediator.Send(new List.Querry());
         }
+        [HttpGet("bycategory")]
+        public async Task<ActionResult<List<Category>>> ListByCategories()
+        {
+            return await Mediator.Send(new ListByCategories.Querry());
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> Details(int id)

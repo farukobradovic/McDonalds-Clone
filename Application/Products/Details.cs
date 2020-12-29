@@ -28,7 +28,7 @@ namespace Application.Products
             public async Task<Product> Handle(Querry request, CancellationToken cancellationToken)
             {
                 //handler logic goes here
-                var product = await _context.Products.Include(c => c.Photo).SingleOrDefaultAsync(c => c.Id == request.Id);
+                var product = await _context.Products.SingleOrDefaultAsync(c => c.Id == request.Id);
                 if (product == null)
                     throw new RestException(HttpStatusCode.NotFound, new { product = "Not found" });
 

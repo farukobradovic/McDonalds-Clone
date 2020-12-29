@@ -1,5 +1,6 @@
+import { observer } from "mobx-react-lite";
 import React, { Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import { AboutUs } from "../../features/articles/AboutUs";
 import { Career } from "../../features/articles/Career";
 import { Family } from "../../features/articles/Family";
@@ -12,6 +13,8 @@ import { RestaurantTitova } from "../../features/articles/RestaurantTitova";
 import { Footer } from "../../features/footer/Footer";
 import { HomePage } from "../../features/home/HomePage";
 import { NavBar } from "../../features/nav/NavBar";
+import ProductDetails from "../../features/products/product/ProductDetails";
+import Products from "../../features/products/Products";
 
 const App = () => {
   return (
@@ -27,6 +30,8 @@ const App = () => {
               <Route exact path='/about-us' component={AboutUs} />
               <Route exact path='/restaurants' component={Restaurants} />
               <Route exact path='/career' component={Career} />
+              <Route exact path='/products' component={Products} />
+              <Route exact path='/products/:id' component={ProductDetails} />
               <Route
                 exact
                 path='/restaurant-Titova'
@@ -56,4 +61,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default observer(App);

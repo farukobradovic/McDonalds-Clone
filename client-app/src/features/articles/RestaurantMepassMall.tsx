@@ -1,6 +1,14 @@
 import React, { Fragment } from "react";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
 
 export const RestaurantMepasMall = () => {
+  const fadeImages = [
+    "assets/restaurant-1.png",
+    "assets/restaurant-2.png",
+    "assets/restaurant-3.png",
+    "assets/restaurant-4.png",
+  ];
   return (
     <Fragment>
       <main>
@@ -28,8 +36,32 @@ export const RestaurantMepasMall = () => {
               </p>
             </div>
             <div className='right'>
-              <div className='images'>
-                <img src='/assets/restaurant-1.png' alt='restaurant' />
+              <div className='images' style={{ maxWidth: "50rem" }}>
+                <div className='slide-container'>
+                  <Slide>
+                    <div className='each-fade'>
+                      <div className='image-container'>
+                        <img src={fadeImages[1]} alt='restaurant' />
+                      </div>
+                    </div>
+                    <div className='each-fade'>
+                      <div className='image-container'>
+                        <img src={fadeImages[2]} alt='restaurant' />
+                      </div>
+                    </div>
+                    <div className='each-fade'>
+                      <div className='image-container'>
+                        <img src={fadeImages[2]} alt='restaurant' />
+                      </div>
+                    </div>
+                    <div className='each-fade'>
+                      <div className='image-container'>
+                        <img src={fadeImages[3]} alt='restaurant' />
+                      </div>
+                    </div>
+                  </Slide>
+                </div>
+                {/* <img src='/assets/restaurant-1.png' alt='restaurant' /> */}
               </div>
               <div className='options'>
                 <div className='left'>
