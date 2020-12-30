@@ -70,24 +70,40 @@ export const NavBar = () => {
               <div className='dropdown'>
                 <i className='fas fa-user'></i>
                 <div className='dropdown-content'>
-                  <a href='#'>
+                  <Link to='/user/profile'>
                     <i className='fas fa-user-circle'></i> Moj profil
-                  </a>
-                  <a href='#'>
-                    <i className='fas fa-sign-out-alt'></i> Odjava
-                  </a>
+                  </Link>
+                  <button
+                    style={{
+                      width: "100%",
+                      color: "#232323",
+                      padding: "12px 16px",
+                      display: "flex",
+                      alignItems: "center",
+                      fontSize: "1.5rem",
+                      border: "none",
+                      cursor: "pointer",
+                      backgroundColor: "#f9f9f9",
+                    }}
+                  >
+                    <i
+                      className='fas fa-sign-out-alt'
+                      style={{ fontSize: "2rem", marginRight: "2rem" }}
+                    ></i>{" "}
+                    Odjava
+                  </button>
                 </div>
               </div>
             ) : (
               <div className='dropdown'>
                 <i className='fas fa-user'></i>
                 <div className='dropdown-content'>
-                  <a href='#'>
-                    <i className='fas fa-user-plus'></i> Registracija
-                  </a>
-                  <a href='#'>
+                  <Link to='/register'>
+                    <i className='fas fa-user'></i> Registracija
+                  </Link>
+                  <Link to='/login'>
                     <i className='fas fa-sign-out-alt'></i> Prijava
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}

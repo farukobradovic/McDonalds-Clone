@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { ICategory, IProduct } from "../models/product";
+import { IUser, IUserFormValues } from "../models/user";
 
 axios.defaults.baseURL ="http://localhost:5000/api";
 
@@ -21,8 +22,13 @@ var Products = {
     details: (id: string): Promise<IProduct> => requests.get(`/products/${id}`)
 }
 
+var User = {
+    login: (user: IUserFormValues): Promise<IUser> => requests.post("/user/login", user),
+    register:(user: IUserFormValues): Promise<IUser> => requests.post("/user/register", user)
+}
 
 
 export default {
-    Products
+    Products,
+    User
 }

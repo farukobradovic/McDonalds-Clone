@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React, { Fragment } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { AboutUs } from "../../features/articles/AboutUs";
 import { Career } from "../../features/articles/Career";
 import { Family } from "../../features/articles/Family";
@@ -15,10 +16,14 @@ import { HomePage } from "../../features/home/HomePage";
 import { NavBar } from "../../features/nav/NavBar";
 import ProductDetails from "../../features/products/product/ProductDetails";
 import Products from "../../features/products/Products";
+import Login from "../../features/user/Login";
+import { Profile } from "../../features/profile/Profile";
+import Register from "../../features/user/Register";
 
 const App = () => {
   return (
     <Fragment>
+      {/* <ToastContainer position='bottom-right' /> */}
       <Route
         render={() => (
           <Fragment>
@@ -32,6 +37,9 @@ const App = () => {
               <Route exact path='/career' component={Career} />
               <Route exact path='/products' component={Products} />
               <Route exact path='/products/:id' component={ProductDetails} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/user/profile' component={Profile} />
               <Route
                 exact
                 path='/restaurant-Titova'
