@@ -6,7 +6,15 @@ export interface IProduct{
     fat: number,
     protein: number,
     carbohydrates: number,
-    photo: IPhoto
+    photo: IPhoto,
+    comments: IComment[]
+}
+
+export interface IComment{
+    id: string;
+    body: string;
+    username: string;
+    createdAt: Date;
 }
 
 
@@ -33,4 +41,11 @@ export class ProductInvoice implements IProductInvoice{
     constructor(product: any, quantity: any){
         Object.assign(this, product,quantity);
     }
+}
+
+
+export interface ICommentFormValues{
+    body?: string;
+    createdAt?: Date;
+    productId?: any;
 }

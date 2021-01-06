@@ -9,8 +9,8 @@ export interface IUser{
 }
 
 export interface IUserFormValues{
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
     name?: string;
     lastname?: string;
     username?: string;

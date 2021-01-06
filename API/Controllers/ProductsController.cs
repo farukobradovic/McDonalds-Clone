@@ -9,7 +9,7 @@ namespace API.Controllers
     public class ProductsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> List()
+        public async Task<ActionResult<List<ProductDto>>> List()
         {
             return await Mediator.Send(new List.Querry());
         }
@@ -20,7 +20,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> Details(int id)
+        public async Task<ActionResult<ProductDto>> Details(int id)
         {
             return await Mediator.Send(new Details.Querry { Id = id });
         }

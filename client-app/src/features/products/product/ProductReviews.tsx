@@ -1,43 +1,96 @@
-import React, { Fragment } from "react";
+import { observer } from "mobx-react-lite";
+import React, {
+  FormEvent,
+  Fragment,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { ICommentFormValues } from "../../../app/models/product";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
-export const ProductReviews = () => {
+const ProductReviews = () => {
+  var rootStore = useContext(RootStoreContext);
+  var {
+    product,
+    addComment,
+    createHubConnection,
+    stopHubConnection,
+  } = rootStore.productStore;
+
+  useEffect(() => {
+    createHubConnection(product!.id.toString());
+    return () => {
+      stopHubConnection();
+    };
+  }, [createHubConnection, stopHubConnection]);
+
+  const initalizeFormState = () => {
+    return {
+      body: "",
+    };
+  };
+
+  const clearFormState = () => {
+    return {
+      body: "",
+    };
+  };
+
+  const [commentBody, setCommentBody] = useState<ICommentFormValues>(
+    initalizeFormState
+  );
+
+  const handleInputChange = (
+    event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.currentTarget;
+    // validate;
+    setCommentBody({ ...commentBody, [name]: value });
+    // console.log(commentBody);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    setCommentBody(clearFormState);
+
+    // commentBody.createdAt = Date.now();
+
+    addComment(commentBody).catch((err) => {
+      console.log(err.response);
+    });
+  };
+
   return (
     <Fragment>
       <div className='reviews'>
         <h2>Ostavite komentar na proizvod: </h2>
-        <div className='comment'>
-          <div className='upper'>
-            <img src='/assets/user.jpg' alt='' />
-            <div className='desc'>
-              <p>Faruk Obradović</p>
-              <p className='small-date'>20.04.2021 15:33 PM</p>
+        {product &&
+          product.comments &&
+          product.comments.map((comment) => (
+            <div className='comment'>
+              <div className='upper'>
+                <img src='/assets/user.jpg' alt='' />
+                <div className='desc'>
+                  <p>{comment.username}</p>
+                  <p className='small-date'>
+                    {new Date(comment.createdAt).toDateString()}
+                  </p>
+                </div>
+              </div>
+              <div className='down'>
+                <p>{comment.body}</p>
+              </div>
             </div>
-          </div>
-          <div className='down'>
-            <p>
-              Ovaj proizvod je stvarno dobar. Jedva čekam da ga ponovo naručim.
-              Sve preporuke. Pozdrav !
-            </p>
-          </div>
-        </div>
-        <div className='comment'>
-          <div className='upper'>
-            <img src='/assets/user.jpg' alt='' />
-            <div className='desc'>
-              <p>Belmin Mahić</p>
-              <p className='small-date'>20.04.2021 15:33 PM</p>
-            </div>
-          </div>
-          <div className='down'>
-            <p>
-              Ovaj proizvod je stvarno dobar. Jedva čekam da ga ponovo naručim.
-              Sve preporuke. Pozdrav !
-            </p>
-          </div>
-        </div>
+          ))}
       </div>
-      <form className='form-comment'>
-        <textarea placeholder='Ostavite komentar...'></textarea>
+      <form className='form-comment' onSubmit={handleSubmit}>
+        <textarea
+          placeholder='Ostavite komentar...'
+          onChange={handleInputChange}
+          name='body'
+          required
+        ></textarea>
         <button type='submit' className='submit-button'>
           Potvrdi
         </button>
@@ -45,3 +98,5 @@ export const ProductReviews = () => {
     </Fragment>
   );
 };
+
+export default observer(ProductReviews);

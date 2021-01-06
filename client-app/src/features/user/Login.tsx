@@ -84,7 +84,7 @@ const Login = () => {
                       <input
                         onChange={handleInputChange}
                         value={loginInfo.password}
-                        type='text'
+                        type='password'
                         name='password'
                         id='password'
                         className='form-input'

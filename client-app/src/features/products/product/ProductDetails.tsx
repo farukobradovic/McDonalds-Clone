@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { ProductInfo } from "./ProductInfo";
-import { ProductReviews } from "./ProductReviews";
+import ProductReviews from "./ProductReviews";
 import { ProductTable } from "./ProductTable";
 
 interface DetailParams {

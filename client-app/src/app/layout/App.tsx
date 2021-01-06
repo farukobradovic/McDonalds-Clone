@@ -1,6 +1,11 @@
 import { observer } from "mobx-react-lite";
-import React, { Fragment } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import React, { Fragment, useContext, useEffect } from "react";
+import {
+  Route,
+  RouteComponentProps,
+  Switch,
+  withRouter,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AboutUs } from "../../features/articles/AboutUs";
 import { Career } from "../../features/articles/Career";
@@ -13,14 +18,29 @@ import { Restaurants } from "../../features/articles/Restaurants";
 import { RestaurantTitova } from "../../features/articles/RestaurantTitova";
 import { Footer } from "../../features/footer/Footer";
 import { HomePage } from "../../features/home/HomePage";
-import { NavBar } from "../../features/nav/NavBar";
+import NavBar from "../../features/nav/NavBar";
 import ProductDetails from "../../features/products/product/ProductDetails";
 import Products from "../../features/products/Products";
 import Login from "../../features/user/Login";
 import { Profile } from "../../features/profile/Profile";
 import Register from "../../features/user/Register";
+import { RootStoreContext } from "../stores/rootStore";
+import { LoadingComponent } from "./LoadingComponent";
 
 const App = () => {
+  const rootStore = useContext(RootStoreContext);
+  const { setAppLoaded, token, appLoaded } = rootStore.commonStore;
+  const { getUser } = rootStore.userStore;
+  useEffect(() => {
+    if (token) {
+      getUser().finally(() => setAppLoaded());
+    } else {
+      setAppLoaded();
+    }
+  }, [getUser, setAppLoaded, token]);
+
+  if (!appLoaded) return <LoadingComponent content='Loading application' />;
+
   return (
     <Fragment>
       {/* <ToastContainer position='bottom-right' /> */}
@@ -39,7 +59,7 @@ const App = () => {
               <Route exact path='/products/:id' component={ProductDetails} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
-              <Route exact path='/user/profile' component={Profile} />
+              <Route exact path='/user' component={Profile} />
               <Route
                 exact
                 path='/restaurant-Titova'

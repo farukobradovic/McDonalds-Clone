@@ -4,6 +4,16 @@ import { IUser, IUserFormValues } from "../models/user";
 
 axios.defaults.baseURL ="http://localhost:5000/api";
 
+
+axios.interceptors.request.use((config) => {
+    const token = window.localStorage.getItem("jwt");
+    if(token)
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+}, error => {
+    return Promise.reject(error);
+})
+
 const responseBody = (response: AxiosResponse) => response.data;
 
 const sleep = (ms: number) => (response: AxiosResponse) => new Promise<AxiosResponse>(resolve => setTimeout(() => resolve(response), ms));
@@ -24,7 +34,9 @@ var Products = {
 
 var User = {
     login: (user: IUserFormValues): Promise<IUser> => requests.post("/user/login", user),
-    register:(user: IUserFormValues): Promise<IUser> => requests.post("/user/register", user)
+    register:(user: IUserFormValues): Promise<IUser> => requests.post("/user/register", user),
+    edit: (user: IUserFormValues) => requests.put("/user", user),
+    current: (): Promise<IUser> => requests.get("/user")
 }
 
 

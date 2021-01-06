@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { RootStoreContext } from "../../app/stores/rootStore";
 
-export const NavBar = () => {
+const NavBar = () => {
   const rootStore = useContext(RootStoreContext);
-  const { user } = rootStore.userStore;
+  const { user, logout } = rootStore.userStore;
   return (
     <Fragment>
       <nav className='navigation'>
@@ -54,10 +55,18 @@ export const NavBar = () => {
             </ul>
           </div>
           <div className='social-links'>
-            <a href='#' className='social-links-link'>
+            <a
+              href='https://www.facebook.com/McDonaldsBiH'
+              target='_blank'
+              className='social-links-link'
+            >
               <i className='fab fa-facebook'></i>
             </a>
-            <a href='#' className='social-links-link'>
+            <a
+              href='https://www.instagram.com/mcdonalds.bih/'
+              target='_blank'
+              className='social-links-link'
+            >
               <i className='fab fa-instagram'></i>
             </a>
             <a href='#' className='social-links-link'>
@@ -70,10 +79,11 @@ export const NavBar = () => {
               <div className='dropdown'>
                 <i className='fas fa-user'></i>
                 <div className='dropdown-content'>
-                  <Link to='/user/profile'>
+                  <Link to='/user'>
                     <i className='fas fa-user-circle'></i> Moj profil
                   </Link>
                   <button
+                    onClick={() => logout()}
                     style={{
                       width: "100%",
                       color: "#232323",
@@ -113,3 +123,5 @@ export const NavBar = () => {
     </Fragment>
   );
 };
+
+export default observer(NavBar);

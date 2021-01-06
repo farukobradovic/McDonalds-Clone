@@ -2,8 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Application.User;
-
-
+using MediatR;
 
 namespace API.Controllers
 {
@@ -27,6 +26,12 @@ namespace API.Controllers
         public async Task<ActionResult<User>> CurrentUser()
         {
             return await Mediator.Send(new CurrentUser.Querry());
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Unit>> Edit(Edit.Command command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }

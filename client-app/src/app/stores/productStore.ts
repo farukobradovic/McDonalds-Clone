@@ -1,3 +1,4 @@
+import { HubConnection, HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { action, computed, makeObservable, observable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import { ICategory, IProduct, IProductInvoice, ProductInvoice } from "../models/product";
@@ -17,6 +18,58 @@ export default class ProductStore{
     @observable loadingCategories = true;
     @observable loadingProduct = true;
     @observable inBucket: IProductInvoice[] | null = null;
+
+
+
+    @observable.ref hubConnection: HubConnection | null = null;
+
+    @action createHubConnection = (productId: string) => {
+        this.hubConnection = new HubConnectionBuilder()
+        .withUrl('http://localhost:5000/chat', {
+            accessTokenFactory: () => this.rootStore.commonStore.token!
+        })
+        .configureLogging(LogLevel.Information)
+        .build();
+
+        this.hubConnection
+        .start()
+        .then(() => console.log(this.hubConnection!.state))
+        .then(() => {
+            console.log("Attempting to joing group");
+            this.hubConnection!.invoke("AddToGroup", productId);
+        })
+        .catch(error => console.log("Error establishing connection: ", error));
+
+        this.hubConnection.on("ReceiveComment", comment => {
+            runInAction(() => {
+                this.product!.comments.push(comment);
+            })
+        })
+
+        this.hubConnection.on("Send", message => {
+            console.log(message);
+        })
+    }
+
+    @action stopHubConnection = () =>{
+        this.hubConnection!.invoke("RemoveFromGroup", this.product!.id)
+        .then(() => {
+            this.hubConnection!.stop()
+        })
+        .then(() => console.log("Connection stopped"))
+        .catch(err => console.log(err))
+    }
+
+    @action addComment = async (values: any) => {
+        values.productId = this.product!.id;
+        try{
+            await this.hubConnection!.invoke("SendComment", values);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
 
 
     @action loadProductsByCategories = async () => {

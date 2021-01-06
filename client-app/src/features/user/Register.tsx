@@ -146,7 +146,7 @@ const Register = () => {
                     <div className='one-input'>
                       <label htmlFor=''>Šifra</label>
                       <input
-                        type='text'
+                        type='password'
                         className='form-input'
                         placeholder='Šifra'
                         name='password'

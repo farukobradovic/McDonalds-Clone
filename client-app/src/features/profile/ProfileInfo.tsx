@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React, { Fragment, useContext } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 
@@ -6,7 +7,7 @@ interface IProps {
   editMode: boolean;
 }
 
-export const ProfileInfo: React.FC<IProps> = ({ setEditMode, editMode }) => {
+const ProfileInfo: React.FC<IProps> = ({ setEditMode, editMode }) => {
   const rootStore = useContext(RootStoreContext);
   const { user } = rootStore.userStore;
   return (
@@ -14,7 +15,15 @@ export const ProfileInfo: React.FC<IProps> = ({ setEditMode, editMode }) => {
       <div className='infos'>
         <div className='upper'>
           <h2>Osnovne informacije</h2>
-          <button onClick={() => setEditMode(!editMode)}>
+          <button
+            onClick={() => setEditMode(!editMode)}
+            style={{
+              border: "none",
+              cursor: "pointer",
+              color: "#da291c",
+              outline: "none",
+            }}
+          >
             <i className='far fa-edit'></i>
           </button>
         </div>
@@ -42,3 +51,5 @@ export const ProfileInfo: React.FC<IProps> = ({ setEditMode, editMode }) => {
     </Fragment>
   );
 };
+
+export default observer(ProfileInfo);

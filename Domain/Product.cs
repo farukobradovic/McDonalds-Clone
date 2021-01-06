@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domain
 {
@@ -17,6 +18,8 @@ namespace Domain
         public double Fat { get; set; }
         public double Protein { get; set; }
         public double Carbohydrates { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
 
         // [ForeignKey("CategoryId")]
         // public virtual Category Category { get; set; }
