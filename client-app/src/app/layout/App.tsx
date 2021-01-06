@@ -26,6 +26,7 @@ import { Profile } from "../../features/profile/Profile";
 import Register from "../../features/user/Register";
 import { RootStoreContext } from "../stores/rootStore";
 import { LoadingComponent } from "./LoadingComponent";
+import ProductOrderBucket from "../../features/products/productOrder/ProductOrderBucket";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -60,6 +61,11 @@ const App = () => {
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/user' component={Profile} />
+              <Route
+                exact
+                path='/products/order'
+                component={ProductOrderBucket}
+              />
               <Route
                 exact
                 path='/restaurant-Titova'

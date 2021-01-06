@@ -68,7 +68,7 @@ const ProductReviews = () => {
         {product &&
           product.comments &&
           product.comments.map((comment) => (
-            <div className='comment'>
+            <div className='comment' key={comment.id}>
               <div className='upper'>
                 <img src='/assets/user.jpg' alt='' />
                 <div className='desc'>

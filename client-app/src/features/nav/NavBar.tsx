@@ -2,10 +2,12 @@ import { observer } from "mobx-react-lite";
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { RootStoreContext } from "../../app/stores/rootStore";
+import NavBarProduct from "./NavBarProduct";
 
 const NavBar = () => {
   const rootStore = useContext(RootStoreContext);
   const { user, logout } = rootStore.userStore;
+  const { inBucket, inBucketSum } = rootStore.productStore;
   return (
     <Fragment>
       <nav className='navigation'>
@@ -69,9 +71,32 @@ const NavBar = () => {
             >
               <i className='fab fa-instagram'></i>
             </a>
-            <a href='#' className='social-links-link'>
-              <i className='fas fa-shopping-cart'></i>
-            </a>
+            <div
+              className='dropdown-bucket'
+              style={{ float: "right", marginRight: "0.5rem" }}
+            >
+              <i className='fas fa-shopping-cart' id='position-abs'></i>
+              <div className='dropdown-content-bucket'>
+                {inBucket &&
+                  inBucket.map((product) => (
+                    <NavBarProduct
+                      key={product.product.id}
+                      product={product.product}
+                      quantity={product.quantity}
+                    />
+                  ))}
+                {inBucket && inBucket.length > 0 ? (
+                  <Link to='/products/order' className='bucket-item-total'>
+                    <h2>Ukupno: </h2>
+                    <h2>{inBucketSum()} BAM</h2>
+                  </Link>
+                ) : (
+                  <a href='#' className='bucket-item-total'>
+                    <h2>Korpa je prazna </h2>
+                  </a>
+                )}
+              </div>
+            </div>
             {/* <a href='#' className='social-links-link'>
               <i className='fas fa-user'></i>
             </a> */}

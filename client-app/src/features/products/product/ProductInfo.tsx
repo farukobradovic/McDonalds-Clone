@@ -30,7 +30,7 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
                 </button>
                 <input
                   type='number'
-                  defaultValue={quantity}
+                  value={quantity}
                   style={{ marginRight: 0 }}
                 />
                 <button
