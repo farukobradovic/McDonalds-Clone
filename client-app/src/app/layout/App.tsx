@@ -22,11 +22,12 @@ import NavBar from "../../features/nav/NavBar";
 import ProductDetails from "../../features/products/product/ProductDetails";
 import Products from "../../features/products/Products";
 import Login from "../../features/user/Login";
-import { Profile } from "../../features/profile/Profile";
+import Profile from "../../features/profile/Profile";
 import Register from "../../features/user/Register";
 import { RootStoreContext } from "../stores/rootStore";
 import { LoadingComponent } from "./LoadingComponent";
 import ProductOrderBucket from "../../features/products/productOrder/ProductOrderBucket";
+import Invoice from "../../features/profile/Invoice/Invoice";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -57,15 +58,13 @@ const App = () => {
               <Route exact path='/restaurants' component={Restaurants} />
               <Route exact path='/career' component={Career} />
               <Route exact path='/products' component={Products} />
+              <Route exact path='/invoice' component={ProductOrderBucket} />
               <Route exact path='/products/:id' component={ProductDetails} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/user' component={Profile} />
-              <Route
-                exact
-                path='/products/order'
-                component={ProductOrderBucket}
-              />
+              <Route exact path='/invoice/:id' component={Invoice} />
+
               <Route
                 exact
                 path='/restaurant-Titova'

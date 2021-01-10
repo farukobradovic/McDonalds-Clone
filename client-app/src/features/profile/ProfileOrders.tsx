@@ -1,6 +1,16 @@
-import React, { Fragment } from "react";
+import { observer } from "mobx-react-lite";
+import React, { Fragment, useContext, useEffect } from "react";
+import { RootStoreContext } from "../../app/stores/rootStore";
+import ProfileOrderInvoice from "./ProfileOrderInvoice";
 
-export const ProfileOrders = () => {
+const ProfileOrders = () => {
+  var rootStore = useContext(RootStoreContext);
+  const { getInvoices, invoices } = rootStore.productStore;
+
+  useEffect(() => {
+    getInvoices();
+  }, [getInvoices]);
+
   return (
     <Fragment>
       <div className='factures'>
@@ -8,47 +18,14 @@ export const ProfileOrders = () => {
           <h2>Lista narudžbi</h2>
         </div>
         <div className='down'>
-          <div className='row'>
-            <div className='left'>
-              <p>Datum narudžbe: 5.5.2021 20:00 PM</p>
-            </div>
-            <div className='middle'>
-              <p>Cijena: 28.00 BAM</p>
-            </div>
-            <div className='right'>
-              <a href='#' className='button'>
-                Pogledaj
-              </a>
-            </div>
-          </div>
-          <div className='row'>
-            <div className='left'>
-              <p>Datum narudžbe: 5.5.2021 20:00 PM</p>
-            </div>
-            <div className='middle'>
-              <p>Cijena: 78.00 BAM</p>
-            </div>
-            <div className='right'>
-              <a href='#' className='button'>
-                Pogledaj
-              </a>
-            </div>
-          </div>
-          <div className='row'>
-            <div className='left'>
-              <p>Datum narudžbe: 5.5.2021 20:00 PM</p>
-            </div>
-            <div className='middle'>
-              <p>Cijena: 15.00 BAM</p>
-            </div>
-            <div className='right'>
-              <a href='#' className='button'>
-                Pogledaj
-              </a>
-            </div>
-          </div>
+          {invoices &&
+            invoices!.map((i) => (
+              <ProfileOrderInvoice key={i.id} invoice={i} />
+            ))}
         </div>
       </div>
     </Fragment>
   );
 };
+
+export default observer(ProfileOrders);

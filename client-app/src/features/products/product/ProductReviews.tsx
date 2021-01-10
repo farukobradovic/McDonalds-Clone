@@ -18,6 +18,8 @@ const ProductReviews = () => {
     stopHubConnection,
   } = rootStore.productStore;
 
+  const { user } = rootStore.userStore;
+
   useEffect(() => {
     createHubConnection(product!.id.toString());
     return () => {
@@ -83,18 +85,20 @@ const ProductReviews = () => {
               </div>
             </div>
           ))}
+        {user && (
+          <form className='form-comment' onSubmit={handleSubmit}>
+            <textarea
+              placeholder='Ostavite komentar...'
+              onChange={handleInputChange}
+              name='body'
+              required
+            ></textarea>
+            <button type='submit' className='submit-button'>
+              Potvrdi
+            </button>
+          </form>
+        )}
       </div>
-      <form className='form-comment' onSubmit={handleSubmit}>
-        <textarea
-          placeholder='Ostavite komentar...'
-          onChange={handleInputChange}
-          name='body'
-          required
-        ></textarea>
-        <button type='submit' className='submit-button'>
-          Potvrdi
-        </button>
-      </form>
     </Fragment>
   );
 };

@@ -77,6 +77,7 @@ const Login = () => {
                         type='text'
                         className='form-input'
                         placeholder='Unesite vašu email adresu'
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -89,6 +90,7 @@ const Login = () => {
                         id='password'
                         className='form-input'
                         placeholder='Unseite šifru'
+                        required
                       />
                     </div>
 

@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IProduct {
   id: number;
   name: string;
@@ -47,4 +49,26 @@ export interface ICommentFormValues {
   body?: string;
   createdAt?: Date;
   productId?: any;
+}
+
+export interface IProdsInvoices {
+  productId: any;
+  quantity: any;
+}
+export class ProdsInvoices implements IProdsInvoices {
+  productId: any;
+  quantity: any;
+
+  constructor(productId: any, quantity: any) {
+    this.productId = productId;
+    this.quantity = quantity;
+  }
+}
+
+export interface IInvoice {
+  id: number;
+  sum: number;
+  createdAt: Date;
+  author: IUser;
+  products: IProductInvoice[];
 }

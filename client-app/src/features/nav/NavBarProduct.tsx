@@ -14,7 +14,7 @@ const NavBarProduct: React.FC<IProps> = ({ product, quantity }) => {
   const { removeFromBucket } = rootStore.productStore;
   return (
     <Fragment>
-      <Link to='/products' className='bucket-item'>
+      <Link to={`/products/${product.id}`} className='bucket-item'>
         <div className='left'>
           <img src={product.photo.url} alt='' />
         </div>

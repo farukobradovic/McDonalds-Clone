@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { IProduct } from "../../../app/models/product";
+import { RootStoreContext } from "../../../app/stores/rootStore";
 
 export interface IProps {
   product: IProduct;
@@ -8,6 +9,8 @@ export interface IProps {
 }
 
 const ProductOrder: React.FC<IProps> = ({ product, quantity }) => {
+  const rootStore = useContext(RootStoreContext);
+  const { removeFromBucket } = rootStore.productStore;
   return (
     <Fragment>
       <tr>
@@ -16,9 +19,19 @@ const ProductOrder: React.FC<IProps> = ({ product, quantity }) => {
           <span>{product.name}</span>
         </td>
         <td>
-          <a href='#'>
+          <button
+            onClick={() => removeFromBucket(product.id)}
+            style={{
+              backgroundColor: "none",
+              border: "none",
+              fontSize: "1.5rem",
+              color: "#da291c",
+              cursor: "pointer",
+              outline: "none",
+            }}
+          >
             <i className='fas fa-trash-alt'></i>
-          </a>
+          </button>
         </td>
         <td>{quantity}</td>
         <td>{product.price} BAM</td>

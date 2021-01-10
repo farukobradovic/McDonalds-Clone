@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import React, { Fragment, useContext, useState } from "react";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import EditProfile from "./EditProfile";
 import ProfileInfo from "./ProfileInfo";
-import { ProfileOrders } from "./ProfileOrders";
+import ProfileOrders from "./ProfileOrders";
 
-export const Profile = () => {
+const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   return (
     <Fragment>
@@ -24,3 +25,5 @@ export const Profile = () => {
     </Fragment>
   );
 };
+
+export default observer(Profile);

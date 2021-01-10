@@ -81,6 +81,7 @@ const Register = () => {
                         id='name'
                         value={registerInfo.name}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -93,6 +94,7 @@ const Register = () => {
                         id='lastname'
                         value={registerInfo.lastname}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -105,6 +107,7 @@ const Register = () => {
                         id='username'
                         value={registerInfo.username}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -117,6 +120,7 @@ const Register = () => {
                         id='adress'
                         value={registerInfo.adress}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -129,6 +133,7 @@ const Register = () => {
                         id='phoneNumber'
                         value={registerInfo.phoneNumber}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -141,6 +146,7 @@ const Register = () => {
                         id='email'
                         value={registerInfo.email}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div className='one-input'>
@@ -153,6 +159,7 @@ const Register = () => {
                         id='password'
                         value={registerInfo.password}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <button>Pošalji</button>

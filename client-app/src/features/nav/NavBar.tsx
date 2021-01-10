@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RootStoreContext } from "../../app/stores/rootStore";
 import NavBarProduct from "./NavBarProduct";
@@ -8,6 +8,7 @@ const NavBar = () => {
   const rootStore = useContext(RootStoreContext);
   const { user, logout } = rootStore.userStore;
   const { inBucket, inBucketSum } = rootStore.productStore;
+
   return (
     <Fragment>
       <nav className='navigation'>
@@ -86,7 +87,7 @@ const NavBar = () => {
                     />
                   ))}
                 {inBucket && inBucket.length > 0 ? (
-                  <Link to='/products/order' className='bucket-item-total'>
+                  <Link to='/invoice' className='bucket-item-total'>
                     <h2>Ukupno: </h2>
                     <h2>{inBucketSum()} BAM</h2>
                   </Link>

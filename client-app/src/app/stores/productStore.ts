@@ -14,8 +14,11 @@ import {
 import agent from "../api/agent";
 import {
   ICategory,
+  IInvoice,
+  IProdsInvoices,
   IProduct,
   IProductInvoice,
+  ProdsInvoices,
   ProductInvoice,
 } from "../models/product";
 import { RootStore } from "./rootStore";
@@ -34,6 +37,11 @@ export default class ProductStore {
   @observable loadingCategories = true;
   @observable loadingProduct = true;
   @observable inBucket: IProductInvoice[] = [];
+  @observable loadingInvoice = false;
+  @observable loadingInvoicesGet = false;
+  @observable invoices: IInvoice[] | null = null;
+  @observable invoice: IInvoice | null = null;
+  @observable loadingInvoiceDetails = false;
 
   @observable.ref hubConnection: HubConnection | null = null;
 
@@ -135,8 +143,16 @@ export default class ProductStore {
     // console.log(product.id, quantity);
     let p = new ProductInvoice(product, quantity);
     // console.log("Object created: ", p);
+    var temp = this.inBucket!.find((c) => c.product.id == product.id);
+    if (temp) {
+      console.log("BOG ti mazo");
+      this.inBucket! = this.inBucket!.filter(
+        (c) => c.product.id !== product.id
+      );
+    }
 
     this.inBucket!.push(p);
+
     history.push("/products");
   };
 
@@ -150,5 +166,61 @@ export default class ProductStore {
 
   @action removeFromBucket = (id: number) => {
     this.inBucket = this.inBucket.filter((c) => c.product.id !== id);
+  };
+  @action clearBucket = () => {
+    this.inBucket = [];
+  };
+
+  @action createInvoice = async (products: IProductInvoice[]) => {
+    this.loadingInvoice = true;
+    var prods: IProdsInvoices[] = [];
+    products.map((p) => {
+      prods.push(new ProdsInvoices(p.product.id, p.quantity));
+    });
+    console.log(prods);
+
+    try {
+      await agent.Invoice.create();
+      prods.map(async (p) => {
+        await agent.Invoice.createProductInvoice(p);
+      });
+    } catch (err) {
+      runInAction(() => (this.loadingInvoice = false));
+      console.log(err);
+    }
+
+    runInAction(() => {
+      history.push("/user");
+      this.clearBucket();
+    });
+  };
+
+  @action getInvoices = async () => {
+    this.loadingInvoicesGet = true;
+    try {
+      var invoices = await agent.Invoice.getAll();
+      runInAction(() => {
+        this.invoices = invoices;
+        this.loadingInvoicesGet = false;
+      });
+    } catch (err) {
+      runInAction(() => (this.loadingInvoicesGet = false));
+      console.log(err);
+    }
+  };
+
+  @action getInvoice = async (id: string) => {
+    this.loadingInvoiceDetails = true;
+    try {
+      var invoice = await agent.Invoice.details(id);
+
+      runInAction(() => {
+        this.invoice = invoice;
+        this.loadingInvoiceDetails = false;
+      });
+    } catch (err) {
+      runInAction(() => (this.loadingInvoiceDetails = false));
+      console.log(err);
+    }
   };
 }
