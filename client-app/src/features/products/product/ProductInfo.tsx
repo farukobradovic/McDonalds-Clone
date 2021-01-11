@@ -6,6 +6,8 @@ interface IProps {
   product: IProduct;
 }
 
+const handleInputChange = (e: any) => {};
+
 export const ProductInfo: React.FC<IProps> = ({ product }) => {
   const rootStore = useContext(RootStoreContext);
   const { orderProduct } = rootStore.productStore;
@@ -23,7 +25,11 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
             <div className='inputs'>
               <form onSubmit={(e) => e.preventDefault()}>
                 <button
-                  onClick={() => setQuantity(quantity - 1)}
+                  onClick={() =>
+                    quantity > 1
+                      ? setQuantity(quantity - 1)
+                      : setQuantity(quantity)
+                  }
                   style={{ width: "5rem" }}
                 >
                   -
@@ -32,6 +38,7 @@ export const ProductInfo: React.FC<IProps> = ({ product }) => {
                   type='number'
                   value={quantity}
                   style={{ marginRight: 0 }}
+                  onChange={handleInputChange}
                 />
                 <button
                   onClick={() => setQuantity(quantity + 1)}

@@ -3,14 +3,7 @@ import {
   HubConnectionBuilder,
   LogLevel,
 } from "@microsoft/signalr";
-import {
-  action,
-  computed,
-  makeObservable,
-  observable,
-  reaction,
-  runInAction,
-} from "mobx";
+import { action, makeObservable, observable, runInAction } from "mobx";
 import agent from "../api/agent";
 import {
   ICategory,
@@ -23,6 +16,7 @@ import {
 } from "../models/product";
 import { RootStore } from "./rootStore";
 import { history } from "../..";
+import { toast } from "react-toastify";
 
 export default class ProductStore {
   rootStore: RootStore;
@@ -110,7 +104,7 @@ export default class ProductStore {
   };
 
   getProduct = (id: string) => {
-    let product = this.products?.find((c) => c.id.toString() == id);
+    let product = this.products?.find((c) => c.id.toString() === id);
     return product;
   };
 
@@ -143,7 +137,7 @@ export default class ProductStore {
     // console.log(product.id, quantity);
     let p = new ProductInvoice(product, quantity);
     // console.log("Object created: ", p);
-    var temp = this.inBucket!.find((c) => c.product.id == product.id);
+    var temp = this.inBucket!.find((c) => c.product.id === product.id);
     if (temp) {
       console.log("BOG ti mazo");
       this.inBucket! = this.inBucket!.filter(
@@ -172,27 +166,30 @@ export default class ProductStore {
   };
 
   @action createInvoice = async (products: IProductInvoice[]) => {
-    this.loadingInvoice = true;
-    var prods: IProdsInvoices[] = [];
-    products.map((p) => {
-      prods.push(new ProdsInvoices(p.product.id, p.quantity));
-    });
-    console.log(prods);
-
-    try {
-      await agent.Invoice.create();
-      prods.map(async (p) => {
-        await agent.Invoice.createProductInvoice(p);
+    if (this.inBucket.length > 0) {
+      this.loadingInvoice = true;
+      var prods: IProdsInvoices[] = [];
+      products.map((p) => {
+        prods.push(new ProdsInvoices(p.product.id, p.quantity));
       });
-    } catch (err) {
-      runInAction(() => (this.loadingInvoice = false));
-      console.log(err);
-    }
 
-    runInAction(() => {
-      history.push("/user");
-      this.clearBucket();
-    });
+      try {
+        await agent.Invoice.create();
+        prods.map(async (p) => {
+          await agent.Invoice.createProductInvoice(p);
+        });
+        runInAction(() => {
+          history.push("/user");
+          this.clearBucket();
+          toast.error("Vaša narudžba je zaprimljena");
+        });
+      } catch (err) {
+        runInAction(() => (this.loadingInvoice = false));
+        console.log(err);
+      }
+    } else {
+      toast.error("Vaša korpa je prazna");
+    }
   };
 
   @action getInvoices = async () => {
@@ -209,18 +206,29 @@ export default class ProductStore {
     }
   };
 
-  @action getInvoice = async (id: string) => {
-    this.loadingInvoiceDetails = true;
-    try {
-      var invoice = await agent.Invoice.details(id);
+  findInvoice = (id: string) => {
+    var invoice = this.invoices?.find((c) => c.id.toString() === id);
+    return invoice;
+  };
 
-      runInAction(() => {
-        this.invoice = invoice;
-        this.loadingInvoiceDetails = false;
-      });
-    } catch (err) {
-      runInAction(() => (this.loadingInvoiceDetails = false));
-      console.log(err);
+  @action getInvoice = async (id: string) => {
+    var inv = this.findInvoice(id);
+    this.loadingInvoiceDetails = true;
+    if (inv) {
+      this.invoice = inv;
+      this.loadingInvoiceDetails = false;
+    } else {
+      try {
+        var invoice = await agent.Invoice.details(id);
+
+        runInAction(() => {
+          this.invoice = invoice;
+          this.loadingInvoiceDetails = false;
+        });
+      } catch (err) {
+        runInAction(() => (this.loadingInvoiceDetails = false));
+        console.log(err);
+      }
     }
   };
 }

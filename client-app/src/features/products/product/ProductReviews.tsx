@@ -56,8 +56,6 @@ const ProductReviews = () => {
     e.preventDefault();
     setCommentBody(clearFormState);
 
-    // commentBody.createdAt = Date.now();
-
     addComment(commentBody).catch((err) => {
       console.log(err.response);
     });

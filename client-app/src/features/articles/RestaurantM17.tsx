@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
@@ -22,9 +23,9 @@ export const RestaurantM17 = () => {
               <p className='bolder'>
                 <span>Radno vrijeme: </span>8:00-23:00
               </p>
-              <a href='#' className='button-medium-red'>
+              <Link to='/' className='button-medium-red'>
                 <i className='fas fa-map-marker-alt'></i> Posjetite nas
-              </a>
+              </Link>
               <p className='first'>
                 Najmoderniji McDonald’s drive restoran u BiH otvoren 07. juna
                 2019. godine. Posjeduje 125 sjedećih mjesta unutar restorana i

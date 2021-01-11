@@ -12,7 +12,10 @@ const ProfileOrderInvoice: React.FC<IProps> = ({ invoice }) => {
     <Fragment>
       <div className='row'>
         <div className='left'>
-          <p>Datum narudžbe: {new Date(invoice.createdAt).toDateString()}</p>
+          <p>
+            Datum narudžbe:{" "}
+            {new Date(invoice.createdAt).toLocaleDateString("en-US")}
+          </p>
         </div>
         <div className='middle'>
           <p>Cijena: {invoice.sum} BAM</p>

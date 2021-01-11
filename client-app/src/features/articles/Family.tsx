@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 export const Family = () => {
   return (
@@ -15,9 +16,9 @@ export const Family = () => {
                 Happy Studio je jedinstven, siguran i u potpunosti BESPLATAN
                 digitalni svijet stvoren da zabavi djecu i njihove obitelji!
               </p>
-              <a href='#' className='button-big'>
+              <Link to='/' className='button-big'>
                 Saznajte više
-              </a>
+              </Link>
             </div>
             <div className='family-box'>
               <div className='image'>
@@ -29,9 +30,9 @@ export const Family = () => {
                 Ponuđene kombinacije su različite, a svi sastojci najbolje su
                 kvalitete i okusa.
               </p>
-              <a href='#' className='button-big'>
+              <Link to='/' className='button-big'>
                 Saznajte više
-              </a>
+              </Link>
             </div>
             <div className='family-box'>
               <div className='image'>
@@ -40,12 +41,11 @@ export const Family = () => {
               <h1>Digitalne knjige</h1>
               <p>
                 Otkrijte svijet čuda s našim interaktivnim digitalnim knjigama.
-                Naše nove digitalne knjige su fantastičan put da vaši mališani
-                otkriju čudesni svijet u kojem žive.
+                Naše nove digitalne knjige su fantastičan put da vaši.
               </p>
-              <a href='#' className='button-big'>
+              <Link to='/' className='button-big'>
                 Saznajte više
-              </a>
+              </Link>
             </div>
           </div>
         </main>

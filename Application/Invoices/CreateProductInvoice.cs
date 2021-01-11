@@ -43,7 +43,7 @@ namespace Application.Invoices
                     Quantity = request.Quantity,
                     Invoice = invoice.Last()
                 };
-                invoice.Last().Sum = invoice.Last().Sum + request.Quantity;
+                invoice.Last().Sum = invoice.Last().Sum + request.Quantity * product.Price;
 
                 // _context.InvoiceProducts.Add(productInvoice);
                 invoice.Last().Products.Add(productInvoice);

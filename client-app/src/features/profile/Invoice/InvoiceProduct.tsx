@@ -1,10 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { Fragment } from "react";
-import {
-  IProdsInvoices,
-  IProduct,
-  IProductInvoice,
-} from "../../../app/models/product";
+import { IProductInvoice } from "../../../app/models/product";
 
 export interface IProps {
   prod: IProductInvoice;

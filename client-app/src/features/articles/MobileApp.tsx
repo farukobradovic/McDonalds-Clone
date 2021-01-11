@@ -41,10 +41,14 @@ export const MobileApp = () => {
                 </p>
                 <p>Aplikacije možete preuzeti klikom na linkove:</p>
                 <p>
-                  Android: <a href='#'>https://goo.gl/1cVYmL</a>
+                  Android:{" "}
+                  <a href='https://goo.gl/1cVYmL'>https://goo.gl/1cVYmL</a>
                 </p>
                 <p>
-                  iOS: <a href='#'>https://apple.co/2CjcUE5</a>{" "}
+                  iOS:{" "}
+                  <a href='https://apple.co/2CjcUE5'>
+                    https://apple.co/2CjcUE5
+                  </a>{" "}
                 </p>
               </div>
               <div className='right'>

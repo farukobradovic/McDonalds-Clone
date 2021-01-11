@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { LoadingComponent } from "../../../app/layout/LoadingComponent";
+import Spinner from "../../../app/spinner/Spinner";
 import { RootStoreContext } from "../../../app/stores/rootStore";
 import { ProductInfo } from "./ProductInfo";
 import ProductReviews from "./ProductReviews";
@@ -28,7 +29,8 @@ const ProductDetails: React.FC<RouteComponentProps<DetailParams>> = ({
     // };
   }, [loadProduct, match.params.id]);
 
-  if (loadingProduct) return <LoadingComponent content='Loading product' />;
+  // if (loadingProduct) return <LoadingComponent content='Loading product' />;
+  if (loadingProduct) return <Spinner />;
 
   return (
     <div className='container'>

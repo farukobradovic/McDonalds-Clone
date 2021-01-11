@@ -4,7 +4,6 @@ import {
   IInvoice,
   IProdsInvoices,
   IProduct,
-  IProductInvoice,
 } from "../models/product";
 import { IUser, IUserFormValues } from "../models/user";
 

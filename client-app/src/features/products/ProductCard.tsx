@@ -1,4 +1,3 @@
-import { observer } from "mobx-react-lite";
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { IProduct } from "../../app/models/product";

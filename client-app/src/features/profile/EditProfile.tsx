@@ -38,7 +38,7 @@ const EditProfile: React.FC<IProps> = ({ setEditMode, editMode }) => {
     const { name, value } = event.currentTarget;
     // validate;
     setEdit({ ...edit, [name]: value });
-    console.log(edit);
+    // console.log(edit);
   };
 
   const handleSubmit = (e: any) => {

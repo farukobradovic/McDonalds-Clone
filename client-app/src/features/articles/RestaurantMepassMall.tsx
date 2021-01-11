@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
@@ -21,9 +22,9 @@ export const RestaurantMepasMall = () => {
               <p className='bolder'>
                 <span>Radno vrijeme: </span>8:00-23:00
               </p>
-              <a href='#' className='button-medium-red'>
+              <Link to='/' className='button-medium-red'>
                 <i className='fas fa-map-marker-alt'></i> Posjetite nas
-              </a>
+              </Link>
               <p className='first'>
                 McDonaldsov restoran u Mostaru u šoping centru Mepas Mall
                 svečano je otvoren 13. aprila 2012. godine. Prostire se na 660

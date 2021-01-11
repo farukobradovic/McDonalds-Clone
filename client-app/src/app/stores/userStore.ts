@@ -27,6 +27,7 @@ export default class UserStore {
       });
       this.rootStore.commonStore.setToken(user.token);
       history.push("/");
+      toast.error("Dobrodošli nazad");
       // toast.error("Wellcome back");
     } catch (err) {
       runInAction(() => (this.loadingUser = false));

@@ -1,11 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { Fragment, useContext, useEffect } from "react";
-import {
-  Route,
-  RouteComponentProps,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { AboutUs } from "../../features/articles/AboutUs";
 import { Career } from "../../features/articles/Career";
@@ -25,9 +20,9 @@ import Login from "../../features/user/Login";
 import Profile from "../../features/profile/Profile";
 import Register from "../../features/user/Register";
 import { RootStoreContext } from "../stores/rootStore";
-import { LoadingComponent } from "./LoadingComponent";
 import ProductOrderBucket from "../../features/products/productOrder/ProductOrderBucket";
 import Invoice from "../../features/profile/Invoice/Invoice";
+import Spinner from "../spinner/Spinner";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -41,11 +36,11 @@ const App = () => {
     }
   }, [getUser, setAppLoaded, token]);
 
-  if (!appLoaded) return <LoadingComponent content='Loading application' />;
+  if (!appLoaded) return <Spinner />;
 
   return (
     <Fragment>
-      {/* <ToastContainer position='bottom-right' /> */}
+      <ToastContainer position='bottom-right' />
       <Route
         render={() => (
           <Fragment>

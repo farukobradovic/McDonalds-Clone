@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -16,29 +17,29 @@ export const Footer = () => {
           </div>
         </div>
         <div className='links'>
-          <a href='#section-about'>
+          <Link to='/'>
             <i className='fab fa-facebook'></i>
-          </a>
-          <a href='#section-about'>
+          </Link>
+          <Link to='/'>
             <i className='fab fa-instagram'></i>
-          </a>
-          <a href='#section-about'>
+          </Link>
+          <Link to='/'>
             <i className='fas fa-envelope'></i>
-          </a>
-          <a href='#section-about'>
+          </Link>
+          <Link to='/'>
             <i className='fas fa-phone'></i>
-          </a>
+          </Link>
         </div>
         <div className='privacy'>
           <ul>
             <li>
-              <a href='#'>Kolačići</a>
+              <Link to='/'>Kolačići</Link>
             </li>
             <li>
-              <a href='#'>Privatnost</a>
+              <Link to='/'>Privatnost</Link>
             </li>
             <li>
-              <a href='#'>Uvjeti korištenja</a>
+              <Link to='/'>Uvjeti korištenja</Link>
             </li>
           </ul>
         </div>

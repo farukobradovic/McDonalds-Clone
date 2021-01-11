@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { Fragment, useContext, useState } from "react";
-import { RootStoreContext } from "../../app/stores/rootStore";
+import React, { Fragment, useState } from "react";
 import EditProfile from "./EditProfile";
 import ProfileInfo from "./ProfileInfo";
 import ProfileOrders from "./ProfileOrders";

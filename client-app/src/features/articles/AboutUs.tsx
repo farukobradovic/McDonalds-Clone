@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 export const AboutUs = () => {
   return (
@@ -16,9 +17,9 @@ export const AboutUs = () => {
                 izrazito visokim standardima i sinonim je za brzu i ljubaznu
                 uslugu
               </p>
-              <a href='#' className='button-big'>
+              <Link to='/' className='button-big'>
                 Saznajte više
-              </a>
+              </Link>
             </div>
             <div className='aboutus-box'>
               <div className='image'>
@@ -29,9 +30,9 @@ export const AboutUs = () => {
                 McDonald’s korporacija broji više od 34.000 restorana u 122
                 zemlje, u kojima se dnevno usluži preko 69 miliona gostiju
               </p>
-              <a href='#' className='button-big'>
+              <Link to='/' className='button-big'>
                 Saznajte više
-              </a>
+              </Link>
             </div>
             <div className='aboutus-box'>
               <div className='image'>
@@ -43,9 +44,9 @@ export const AboutUs = () => {
                 izgledu, a najviše o zaštiti hrane kako bi očuvali svježinu i
                 toplinu proizvoda.
               </p>
-              <a href='#' className='button-big'>
+              <Link to='/' className='button-big'>
                 Saznajte više
-              </a>
+              </Link>
             </div>
           </div>
         </main>
