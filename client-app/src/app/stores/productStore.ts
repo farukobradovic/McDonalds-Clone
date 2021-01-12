@@ -166,29 +166,33 @@ export default class ProductStore {
   };
 
   @action createInvoice = async (products: IProductInvoice[]) => {
-    if (this.inBucket.length > 0) {
-      this.loadingInvoice = true;
-      var prods: IProdsInvoices[] = [];
-      products.map((p) => {
-        prods.push(new ProdsInvoices(p.product.id, p.quantity));
-      });
-
-      try {
-        await agent.Invoice.create();
-        prods.map(async (p) => {
-          await agent.Invoice.createProductInvoice(p);
-        });
-        runInAction(() => {
-          history.push("/user");
-          this.clearBucket();
-          toast.error("Vaša narudžba je zaprimljena");
-        });
-      } catch (err) {
-        runInAction(() => (this.loadingInvoice = false));
-        console.log(err);
-      }
+    if (!this.rootStore.userStore.isLoggedIn) {
+      toast.error("Prijavite se");
     } else {
-      toast.error("Vaša korpa je prazna");
+      if (this.inBucket.length > 0) {
+        this.loadingInvoice = true;
+        var prods: IProdsInvoices[] = [];
+        products.map((p) => {
+          prods.push(new ProdsInvoices(p.product.id, p.quantity));
+        });
+
+        try {
+          await agent.Invoice.create();
+          prods.map(async (p) => {
+            await agent.Invoice.createProductInvoice(p);
+          });
+          runInAction(() => {
+            history.push("/user");
+            this.clearBucket();
+            toast.error("Vaša narudžba je zaprimljena");
+          });
+        } catch (err) {
+          runInAction(() => (this.loadingInvoice = false));
+          console.log(err);
+        }
+      } else {
+        toast.error("Vaša korpa je prazna");
+      }
     }
   };
 

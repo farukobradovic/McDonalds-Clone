@@ -1,4 +1,10 @@
-import { action, makeObservable, observable, runInAction } from "mobx";
+import {
+  action,
+  computed,
+  makeObservable,
+  observable,
+  runInAction,
+} from "mobx";
 import agent from "../api/agent";
 import { IUser, IUserFormValues } from "../models/user";
 import { RootStore } from "./rootStore";
@@ -16,6 +22,10 @@ export default class UserStore {
   @observable loadingUser = false;
   @observable loadingRegister = false;
   @observable loadingEdit = false;
+
+  @computed get isLoggedIn() {
+    return !!this.user;
+  }
 
   @action login = async (loginInfo: IUserFormValues) => {
     this.loadingUser = true;

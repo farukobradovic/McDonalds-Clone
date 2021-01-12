@@ -51,11 +51,15 @@ namespace API
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //WWW-Authenticate se ne nalazi defaultno u konzoli hederima vec ga jedino mozemo naci medju netvork zato se dodaje
+            //ovaj withExposedHeader
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+                    policy.AllowAnyHeader().AllowAnyMethod()
+                    .WithExposedHeaders("WWW-Authenticate")
+                    .WithOrigins("http://localhost:3000").AllowCredentials();
                 });
             });
 

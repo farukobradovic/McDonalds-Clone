@@ -23,6 +23,7 @@ import { RootStoreContext } from "../stores/rootStore";
 import ProductOrderBucket from "../../features/products/productOrder/ProductOrderBucket";
 import Invoice from "../../features/profile/Invoice/Invoice";
 import Spinner from "../spinner/Spinner";
+import PrivateRoute from "./PrivateRoute";
 
 const App = () => {
   const rootStore = useContext(RootStoreContext);
@@ -57,8 +58,8 @@ const App = () => {
               <Route exact path='/products/:id' component={ProductDetails} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
-              <Route exact path='/user' component={Profile} />
-              <Route exact path='/invoice/:id' component={Invoice} />
+              <PrivateRoute exact path='/user' component={Profile} />
+              <PrivateRoute exact path='/invoice/:id' component={Invoice} />
 
               <Route
                 exact
